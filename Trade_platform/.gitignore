@@ -1,0 +1,4 @@
+.env
+django_db
+.idea/
+__pycache__/
