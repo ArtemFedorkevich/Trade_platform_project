@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from celery.schedules import crontab
+
 import datetime
 
 import os
@@ -16,6 +18,19 @@ SECRET_KEY = os.environ['SECRET_KEY']
 
 DEBUG = True
 
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
+CELERY_BEAT_SCHEDULE = {
+    'trade_broker': {
+        'task': 'Traiding.tasks.hello_world',
+        'schedule': crontab()
+    }
+}
+
+
 ALLOWED_HOSTS = []
 
 
@@ -28,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_beat',
     'djoser',
     'rest_framework_simplejwt',
     'rest_framework_swagger',

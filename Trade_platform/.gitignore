@@ -1,4 +1,5 @@
 .env
 django_db
+celerybeat-schedule
 .idea/
 __pycache__/
