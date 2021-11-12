@@ -4,7 +4,7 @@ from Traiding.serializers import OfferSerializer
 
 from Items.models import Item, Inventory
 
-from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 
 from rest_framework.response import Response
 
@@ -25,16 +25,18 @@ class OfferViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.Gene
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
+        print(serializer)
         item = Item.objects.get(pk=request.data['item'])
 
         #Quantity of stocks that user have
         user_stock = Inventory.objects.get(user=request.user, item=request.data['item'])
 
         #Quantity of stocks in offers
-        alloffer_stock = Offer.objects.filter(user=request.user, item=request.data['item']).values_list('entry_quantity', flat=True)
+        alloffer_stock = Offer.objects.filter(user=request.user, item=request.data['item'], order_type=2).values_list('entry_quantity', flat=True)
 
-        #Check that amount stocks in inventory is higher than quantity in offer plus input value
-        if user_stock.quantity < sum(alloffer_stock)+request.data['entry_quantity']:
+        #Check that amount stocks in inventory is higher than quantity in table offer for selling plus input value
+        #You can't sell more stocks than you have
+        if user_stock.quantity < sum(alloffer_stock)+request.data['entry_quantity'] and request.data['order_type'] == 2:
             raise ValueError('You have not enough stocks. Input smaller value')
         else:
             serializer.is_valid(raise_exception=True)

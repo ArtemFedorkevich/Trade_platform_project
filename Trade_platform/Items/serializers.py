@@ -37,8 +37,7 @@ class WatchListSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'item', )
 
 
-
-#This serializer for get-request watchlist endpoint
+# This serializer for get-request watchlist endpoint
 class GetWatchListSerializer(serializers.ModelSerializer):
     item = ItemSerializer(read_only=True)
     user = serializers.ReadOnlyField(source='user.username')
@@ -48,7 +47,7 @@ class GetWatchListSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'item')
 
 
-#This serializer for adding money
+# This serializer for adding money
 class MoneySerializer(serializers.ModelSerializer):
 
     class Meta:

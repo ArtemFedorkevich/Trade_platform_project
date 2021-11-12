@@ -1,6 +1,6 @@
 from rest_framework.routers import DefaultRouter
 
-# This routher add paths to routher form authentication.urls
+# This router add paths to router form authentication.urls
 from Items.views import Currencyview, Itemview, Inventoryview, Watchlistview, Moneyview
 
 

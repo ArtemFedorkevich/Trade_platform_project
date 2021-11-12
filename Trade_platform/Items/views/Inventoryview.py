@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets, mixins
 
 
-#Class for creation of Inventories
+# Class for creation of Inventories
 class InventoryViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
     """
     Endpoint for creation of user inventory

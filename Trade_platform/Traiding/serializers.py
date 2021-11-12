@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from Traiding.models import Offer
 
+
 class OfferSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
 

@@ -47,7 +47,6 @@ class WatchList(models.Model):
         unique_together = [['user', 'item']]
 
 
-
 class Money(models.Model):
     """Table of users money"""
     user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.SET_NULL)
@@ -55,4 +54,3 @@ class Money(models.Model):
 
     class Meta:
         unique_together = [['user', 'money']]
-

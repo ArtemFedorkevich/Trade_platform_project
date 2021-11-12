@@ -3,3 +3,4 @@ django_db
 celerybeat-schedule
 .idea/
 __pycache__/
+__docker__/

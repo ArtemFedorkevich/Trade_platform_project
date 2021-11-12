@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework import viewsets, mixins
 
 
-#Class for creation of Items
+# Class for creation of Items
 class ItemsViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
     """
     Endpoint for creation of items by admin
@@ -17,9 +17,8 @@ class ItemsViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.Gene
 
     # All authenticated users can see items, only staff can create items.
     def get_permissions(self):
-        if self.request.method in ('POST'):
+        if self.request.method in ('POST',):
             self.permission_classes = (IsAdminUser, IsAuthenticated)
         else:
             self.permission_classes = (IsAuthenticated,)
         return super().get_permissions()
-
